@@ -1,4 +1,4 @@
-export const Todo = [
+export const Todos = [
   {
     title: 'First Todo',
     isCompleted: false,
@@ -10,3 +10,9 @@ export const Todo = [
     createdAt: new Date().toLocaleDateString(),
   },
 ];
+
+export interface Todo {
+  title: string;
+  isCompleted: boolean;
+  createdAt: string;
+}
