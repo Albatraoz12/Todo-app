@@ -12,24 +12,35 @@ const ShowAllTodos = ({ todos }: any) => {
   };
 
   return (
-    <div className='border w-[90%] flex flex-col p-5 mx-auto'>
-      {todoList &&
-        todoList.map((todo: Todo, index: number) => (
-          <div key={index} className='flex gap-4'>
-            <input
-              type='checkbox'
-              name='completed'
-              id={`completed-${index}`}
-              onChange={() => handleToggleCompleted(index)}
-              checked={todo.isCompleted}
-            />
-            <p className={todo.isCompleted ? 'line-through' : ''}>
-              {todo.title}
-            </p>
-            <p>{todo.createdAt}</p>
-            <p>{todo.isCompleted.toString()}</p>
-          </div>
-        ))}
+    <div>
+      <fieldset className='flex flex-col p-5 mx-auto gap-3 w-[90%] bg-slate-700'>
+        <legend className='hidden'>All your todos!</legend>
+        {todoList &&
+          todoList.map((todo: Todo, index: number) => (
+            <div
+              key={index}
+              className='flex items-center gap-4 border-b-2 py-4'
+            >
+              <input
+                type='checkbox'
+                name='todo'
+                id={`todo-${index}`}
+                className='h-5 w-5 appearance-none border border-gray-300 rounded-md checked:bg-green-500 checked:border-transparent focus:outline-none'
+                onChange={() => handleToggleCompleted(index)}
+                checked={todo.isCompleted}
+              />
+
+              <label
+                htmlFor={`todo-${index}`}
+                className={
+                  todo.isCompleted ? 'line-through text-green-500' : ''
+                }
+              >
+                {todo.title}
+              </label>
+            </div>
+          ))}
+      </fieldset>
     </div>
   );
 };
