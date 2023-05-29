@@ -5,8 +5,8 @@ export const Todo = [
     createdAt: new Date().toLocaleDateString(),
   },
   {
-    title: 'First Todo',
-    isCompleted: false,
+    title: 'Second Todo',
+    isCompleted: true,
     createdAt: new Date().toLocaleDateString(),
   },
 ];
