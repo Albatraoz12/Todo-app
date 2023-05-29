@@ -15,6 +15,7 @@ export default async function Home() {
 
   return (
     <main className='container flex flex-col items-center justify-between mx-auto mt-10 gap-10'>
+      <h1 className='text-center text-2xl'>Todo Tracker</h1>
       <section className='w-full'>
         <CreateTodo />
       </section>
