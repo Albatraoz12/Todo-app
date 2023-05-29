@@ -6,7 +6,7 @@ import React from 'react';
 
 const CreateTodo = () => {
   return (
-    <div className='flex flex-col justify-center items-center gap-3 w-[90%]'>
+    <div className='flex flex-col justify-center items-center gap-3 w-[90%] mx-auto'>
       <label htmlFor='createTodo' className='self-start text-2xl mb-5'>
         Create a todo
       </label>
