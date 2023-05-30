@@ -13,8 +13,6 @@ const fetchAllTodos = async () => {
 };
 
 export default function Home() {
-  // const allTodos = fetchAllTodos();
-
   const { data, error, isLoading } = useQuery<Todo[]>({
     queryFn: fetchAllTodos,
     queryKey: ['todos'],

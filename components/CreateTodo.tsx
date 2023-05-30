@@ -1,37 +1,38 @@
 'use client';
 import React, { useState } from 'react';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { useMutation, useQueryClient } from 'react-query';
 
 const CreateTodo = () => {
   const [title, setTitle] = useState('');
+  const queryClient = useQueryClient();
 
-  const fetchAllTodos = async () => {
-    const response = await fetch('http://localhost:3000/api/getAllTodos', {
-      cache: 'no-store',
-    });
-    const data = response.json();
-    return data;
-  };
-
-  const createTodo = async (title: string) => {
-    const response = await fetch('http://localhost:3000/api/CreateTodo', {
-      method: 'POST',
-      body: JSON.stringify({
-        title: title,
-        isCompleted: false,
-        createdAt: new Date(),
+  const { mutate } = useMutation(
+    async (title: string) =>
+      await fetch('http://localhost:3000/api/CreateTodo', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: title,
+          isCompleted: false,
+          createdAt: new Date(),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }),
-      headers: {
-        'Content-Type': 'application/json',
+    {
+      onError: (error) => {
+        console.log(error);
       },
-    });
-    const data = await response.json();
-    return data;
-  };
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(['todos']);
+        setTitle('');
+      },
+    }
+  );
 
   const handleChange = (e: any) => {
     e.preventDefault();
-    console.log('value: ', e.target.value);
     setTitle(e.target.value);
   };
 
@@ -44,12 +45,13 @@ const CreateTodo = () => {
         <BsFillPlusCircleFill
           size={40}
           color='rgb(71 85 105)'
-          onClick={() => createTodo(title)}
+          onClick={() => mutate(title)}
         />
         <input
           type='text'
           id='createTodo'
           name='createTodo'
+          value={title}
           onChange={(e) => handleChange(e)}
           className='w-full h-10 rounded px-3 bg-slate-700 focus:border-b-white focus:border-b-2 active:border-b-white active:border-b-2 outline-none'
           placeholder='What do you need to accomplish today?'
