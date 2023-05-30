@@ -9,7 +9,7 @@ const CreateTodo = () => {
 
   const { mutate } = useMutation(
     async (title: string) =>
-      await fetch('http://localhost:3000/api/CreateTodo', {
+      await fetch('/api/CreateTodo', {
         method: 'POST',
         body: JSON.stringify({
           title: title,

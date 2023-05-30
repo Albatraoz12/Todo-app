@@ -5,7 +5,7 @@ import { Todo } from '@/utils';
 import { useQuery } from 'react-query';
 
 const fetchAllTodos = async () => {
-  const response = await fetch('http://localhost:3000/api/getAllTodos', {
+  const response = await fetch('api/getAllTodos', {
     cache: 'no-store',
   });
   const data = response.json();
